@@ -1,3 +1,4 @@
+import { number } from 'joi';
 import { prisma } from '../../database.js';
 import { ItemData } from '../../services/backlogServices.js';
 
@@ -13,12 +14,37 @@ export async function insertItem(data: ItemData) {
   return newItem;
 }
 
-export async function findItem(name: string) {
-  const dbItem = await prisma.items.findUnique({
+export async function findItem(data: string | number) {
+  let dbItem: object;
+
+  if (typeof data === 'string') {
+    dbItem = await prisma.items.findUnique({
+      where: {
+        name: data,
+      },
+    });
+  }
+
+  if (typeof data === 'number') {
+    dbItem = await prisma.items.findUnique({
+      where: {
+        id: data,
+      },
+    });
+  }
+
+  return dbItem;
+}
+
+export async function updateItem(data) {
+  const item = await prisma.items.update({
     where: {
-      name,
+      id: data.id,
+    },
+    data: {
+      ...data,
     },
   });
 
-  return dbItem;
+  return item;
 }
