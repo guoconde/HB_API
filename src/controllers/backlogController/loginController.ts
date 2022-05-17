@@ -10,15 +10,12 @@ export async function login(req: Request, res: Response) {
   // eslint-disable-next-line prefer-const
   let { user, password } = req.body;
   const validation = loginSchema.validate(req.body);
-
   if (validation.error) throw wrongSchemaError();
 
   const dbUser = await loginRepository.findUser(user);
-
   if (!dbUser) throw unauthorizedError();
 
   const passValidate = bcrypt.compareSync(password, dbUser.password);
-
   if (!passValidate) throw unauthorizedError();
 
   const token = jwt.sign(dbUser, process.env.TOKEN_SECRET, {
