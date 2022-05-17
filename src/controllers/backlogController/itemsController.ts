@@ -40,3 +40,14 @@ export async function updateItem(req: Request, res: Response) {
 
   res.sendStatus(200);
 }
+
+export async function deleteItem(req: Request, res: Response) {
+  const { id } = req.params;
+
+  const dbItem = await itemsRepository.findItem(parseInt(id));
+  if (!dbItem) throw notFoundError();
+
+  await itemsRepository.deleteItem(parseInt(id));
+
+  res.sendStatus(200);
+}

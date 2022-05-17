@@ -6,5 +6,6 @@ const itemsRouter = Router();
 itemsRouter.get('/items', itemsController.getItems);
 itemsRouter.post('/items/new', itemsController.insterItem);
 itemsRouter.put('/items/:id', itemsController.updateItem);
+itemsRouter.delete('/items/:id', itemsController.deleteItem);
 
 export default itemsRouter;

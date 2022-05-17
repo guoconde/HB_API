@@ -37,7 +37,7 @@ export async function findItem(data: string | number) {
 }
 
 export async function updateItem(data) {
-  const item = await prisma.items.update({
+  await prisma.items.update({
     where: {
       id: data.id,
     },
@@ -45,6 +45,12 @@ export async function updateItem(data) {
       ...data,
     },
   });
+}
 
-  return item;
+export async function deleteItem(id: number) {
+  await prisma.items.delete({
+    where: {
+      id,
+    },
+  });
 }
