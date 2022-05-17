@@ -13,6 +13,15 @@ export async function getItems(req: Request, res: Response) {
   res.send(items);
 }
 
+export async function getItemById(req: Request, res: Response) {
+  const { id } = req.params;
+
+  const item = await itemsRepository.findItem(parseInt(id));
+  if (!item) throw notFoundError();
+
+  res.send(item);
+}
+
 export async function insterItem(req: Request, res: Response) {
   const data = req.body;
 
