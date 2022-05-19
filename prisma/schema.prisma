@@ -18,12 +18,11 @@ enum Payment {
 }
 
 model orders {
-  id        Int         @id @default(autoincrement())
-  name      String
-  items     String
-  adress    String
-  payment   Payment
-  orderItem orderItem[]
+  id      Int     @id @default(autoincrement())
+  name    String
+  items   String
+  adress  String
+  payment Payment
 }
 
 enum ItemType {
@@ -35,23 +34,20 @@ enum ItemType {
 }
 
 model orderItem {
-  id       Int    @id @default(autoincrement())
-  id_item  items  @relation(references: [id], fields: [itemsId])
-  id_order orders @relation(references: [id], fields: [ordersId])
+  id       Int @id @default(autoincrement())
   quantity Int
   itemsId  Int
   ordersId Int
 }
 
 model items {
-  id          Int         @id @default(autoincrement())
-  name        String      @unique
-  picture     String?
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  picture     String?  @default("https://odoo-community.org/web/image/product.template/1044/image_1024?unique=993283e")
   description String
   price       Float
-  avaliable   Boolean
+  avaliable   Boolean? @default(true)
   type        ItemType
-  orderItem   orderItem[]
 }
 
 model users {

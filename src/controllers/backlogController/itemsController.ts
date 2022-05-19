@@ -37,15 +37,19 @@ export async function insterItem(req: Request, res: Response) {
 }
 
 export async function updateItem(req: Request, res: Response) {
+  const { id } = req.params;
   const data = req.body;
 
-  const dbItem = await itemsRepository.findItem(data.id);
+  const validation = itemSchema.validate(req.body);
+  if (validation.error) throw wrongSchemaError();
+
+  const dbItem = await itemsRepository.findItem(parseInt(id));
   if (!dbItem) throw notFoundError();
 
   const conflictItem = await itemsRepository.findItem(data.name);
-  if (conflictItem) throw conflictError();
+  if (conflictItem && conflictItem.id !== parseInt(id)) throw conflictError();
 
-  await itemsRepository.updateItem(data);
+  await itemsRepository.updateItem(parseInt(id), data);
 
   res.sendStatus(200);
 }

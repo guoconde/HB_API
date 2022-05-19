@@ -15,7 +15,7 @@ export async function insertItem(data: ItemData) {
 }
 
 export async function findItem(data: string | number) {
-  let dbItem: object;
+  let dbItem;
 
   if (typeof data === 'string') {
     dbItem = await prisma.items.findUnique({
@@ -36,21 +36,21 @@ export async function findItem(data: string | number) {
   return dbItem;
 }
 
-export async function updateItem(data) {
-  await prisma.items.update({
-    where: {
-      id: data.id,
-    },
-    data: {
-      ...data,
-    },
-  });
+export async function updateItem(id: number, data) {
+  await prisma.items
+    .update({
+      where: {
+        id,
+      },
+      data: {
+        ...data,
+      },
+    })
+    .catch((error) => console.log(error));
 }
 
 export async function deleteItem(id: number) {
   await prisma.items.delete({
-    where: {
-      id,
-    },
+    where: { id },
   });
 }
