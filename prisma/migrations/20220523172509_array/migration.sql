@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "orders" ALTER COLUMN "items" DROP NOT NULL,
+ALTER COLUMN "items" SET DATA TYPE TEXT;

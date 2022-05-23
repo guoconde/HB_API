@@ -7,9 +7,9 @@ export async function getOrders() {
 }
 
 export async function insertOrders(data: any) {
-  const teste = await prisma.orderItem.createMany({
-    data: [data.items[0], data.items[1]],
-  });
+  console.log('1');
+  const teste = await prisma.orders.create({ data });
+  console.log('2');
 
   console.log(teste);
 }

@@ -10,6 +10,8 @@ export async function getOrders(req: Request, res: Response) {
 export async function insertOrder(req: Request, res: Response) {
   const data = req.body;
 
+  console.log(data);
+
   await ordersRepository.insertOrders(data);
 
   res.sendStatus(200);

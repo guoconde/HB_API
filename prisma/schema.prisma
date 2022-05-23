@@ -21,7 +21,7 @@ enum Payment {
 model orders {
   id      Int     @id @default(autoincrement())
   name    String
-  items   String
+  items   String?
   adress  String
   payment Payment
 }
