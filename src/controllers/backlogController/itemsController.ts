@@ -61,6 +61,5 @@ export async function deleteItem(req: Request, res: Response) {
   if (!dbItem) throw notFoundError();
 
   await itemsRepository.deleteItem(parseInt(id));
-
   res.sendStatus(200);
 }
