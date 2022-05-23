@@ -4,10 +4,10 @@ import { tokenMiddleware } from '../../middlewares/tokenMiddleware.js';
 
 const itemsRouter = Router();
 
-itemsRouter.get('/items', tokenMiddleware, itemsController.getItems);
+itemsRouter.get('/items', itemsController.getItems);
 itemsRouter.post('/items/new', tokenMiddleware, itemsController.insterItem);
 itemsRouter.put('/items/:id', tokenMiddleware, itemsController.updateItem);
 itemsRouter.delete('/items/:id', tokenMiddleware, itemsController.deleteItem);
-itemsRouter.get('/items/:id', tokenMiddleware, itemsController.getItemById);
+itemsRouter.get('/items/:id', itemsController.getItemById);
 
 export default itemsRouter;
