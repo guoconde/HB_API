@@ -5,6 +5,6 @@ import { tokenMiddleware } from '../../middlewares/tokenMiddleware.js';
 const ordersRouter = Router();
 
 ordersRouter.get('/orders', tokenMiddleware, ordersController.getOrders);
-ordersRouter.post('/orders', tokenMiddleware, ordersController.insertOrder);
+ordersRouter.post('/orders', ordersController.insertOrder);
 
 export default ordersRouter;
