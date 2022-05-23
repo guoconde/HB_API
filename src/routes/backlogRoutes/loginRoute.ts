@@ -4,5 +4,6 @@ import * as loginController from '../../controllers/backlogController/loginContr
 const loginRouter = Router();
 
 loginRouter.post('/login', loginController.login);
+loginRouter.post('/newuser', loginController.insertUser);
 
 export default loginRouter;

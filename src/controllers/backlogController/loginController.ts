@@ -6,6 +6,13 @@ import { loginSchema } from '../../schemas/loginSchema.js';
 import * as loginRepository from '../../repositories/backlogRepositories/loginRepository.js';
 import { unauthorizedError, wrongSchemaError } from '../../utils/errorUtils.js';
 
+export async function insertUser(req: Request, res: Response) {
+  const { password, user } = req.body;
+  await loginRepository.insert(password, user);
+
+  res.sendStatus(200);
+}
+
 export async function login(req: Request, res: Response) {
   // eslint-disable-next-line prefer-const
   let { user, password } = req.body;
